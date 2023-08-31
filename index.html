@@ -30,27 +30,43 @@
             </div>
             <div class="col-12 col-md-7 right">
                 <div class=mainInfo>
-                    <h1>COMING SOON</h1>
-                    <p class=slogan>Lorem, ipsum dolor sit amet consectetur adipisicing elit. Maxime consequuntur
-                        delectus asperiores tempora autem laboriosam omnis. </p>
-                    <form class=form-subscribe action=#> <input type=email class=form placeholder="Your email address"
-                            required> <button type=submit>Subscribe</button> </form>
+                    <h1>TUNIFF</h1>
+                    <p class=slogan>We will tune your hairstyle with AI </p>
+                    <p class=slogan>Step into Tuniff and unlock a grooming revolution. As you enter, we scan your face, providing AI-powered simulations of potential hairstyles. Our skilled barbers then bring these simulations to life, crafting the perfect haircut that matches your style and features. Tuniff combines innovation with expertise, ensuring you leave our shop not just satisfied, but truly delighted with your grooming experience.</p>
+                    <form class=form-subscribe id="signup-form" role="form" onsubmit="return signup(this)"> <input type=email class=form placeholder="Your email address"
+                            required> <button type=submit id="signup-button">Subscribe</button> </form>
+
                 </div>
-                <ul class=icon-list>
-                    <li class=icon><a class=twitter href=google.com></a></li>
-                    <li class=icon><a class=linkedin href=google.com></a></li>
-                    <li class=icon><a class=facebook href=google.com></a></li>
-                    <li class=icon><a class=instagram href=google.com></a></li>
-                    <li class=icon><a class=youtube href=google.com></a></li>
-                    <li class=icon><a class=github href=google.com></a></li>
-                    <li class=icon><a class=stackoverflow href=google.com></a></li>
-                    <li class=icon><a class=medium href=google.com></a></li>
-                    
-                </ul>
+
             </div>
         </div>
     </div>
     <script type="text/javascript" src="scripts/bundle.js"></script>
+<script>
+    var signupForm = document.getElementById('signup-form');
+    var signupSuccess = document.getElementById('signup-success');
+    var signupError = document.getElementById('signup-error');
+    var signupBtn = document.getElementById('signup-button');
+    var onSignupComplete = function(error) {
+      signupBtn.disabled = false;
+      if (error) {
+        signupError.innerHTML = 'Sorry. Could not signup.';
+      } else {
+        signupSuccess.innerHTML = 'Thanks for signing up!';
+        // hide the form
+        signupForm.style.display = 'none';
+      }
+    };
+    function signup(formObj) {
+        // Store emails to firebase
+        var myFirebaseRef = new Firebase("https://yourappname.firebaseio.com/signups");
+        myFirebaseRef.push({
+          email: formObj.email.value,
+        }, onSignupComplete);
+        signupBtn.disabled = true;
+        return false;
+    }
+</script>
  
 </body>
 
